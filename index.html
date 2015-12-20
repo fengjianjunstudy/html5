@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="file"  id="file" multiple size="90">
+	<input type="button" id="btn">
+	<script type="text/javascript">
+		var buf=new Blob();
+		console.log(buf)
+		document.getElementById("btn").onclick=function(){
+			var files=document.getElementById("file").files;
+			for(var i=0;i<files.length;i++){
+				console.log(files[i].size+" "+files[i].type)
+			}
+		}
+	</script>
+</body>
+</html>
