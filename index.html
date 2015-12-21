@@ -5,14 +5,19 @@
 	<title>Document</title>
 </head>
 <body>
-	<input type="file"  id="file" multiple size="90">
+	<input type="file"  id="file" multiple size="90" accept="image/*">
 	<input type="button" id="btn">
 	<script type="text/javascript">
 		var buf=new Blob();
-		console.log(buf)
+		console.log(!!window.Blob)
 		document.getElementById("btn").onclick=function(){
 			var files=document.getElementById("file").files;
+
 			for(var i=0;i<files.length;i++){
+				var type=files[i].type;
+				if(!/image\/\w+/.test(type)){
+					alert(files[i].name+"不是图像")
+				}
 				console.log(files[i].size+" "+files[i].type)
 			}
 		}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem; 
+		function initFs(){
+			window.requestFileSystem(window.TEMPORARY,1024*1024,function(fs){
+				console.log(fs);
+				console.log("操作成功")
+			},function(e){
+				console.log(e.name)
+			})
+		}
+		initFs();
+	</script>
+</body>
+</html>

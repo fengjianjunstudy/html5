@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>申请磁盘配额</h1>
+	<form>
+		<input type="text" name="" id="capacity" value="1024">
+		<input type="button" value="申请磁盘配额" id="btn">
+	</form>
+	<div id="result"></div>
+	<script type="text/javascript">
+	document.getElementById("btn").onclick=function(){
+		var size=document.getElementById("capacity").value;
+		navigator.webkitPersistentStorage.requestQuota(size,function(grantedBytes){
+			window.webkitRequestFileSystem(PERSISTENT,grantedBytes,function(fs){
+				/*fs.root.getFile("readme.txt",{create:true},function(fileEntry){
+					console.log(fileEntry.isFile)
+					console.log(fileEntry.isDirectory)
+					console.log(fileEntry.name)
+					console.log(fileEntry.fullPath)
+					console.log(fileEntry.filesystem)
+				})*/
+				//创建目录
+				/*fs.root.getDirectory('Documents', {create: true}, function(dirEntry) {
+					alert('You have just created the ' + dirEntry.name + ' directory.');
+				});*/
+				fs.root.getFile('gbin1.txt', {create: true}, function(fileEntry) {
+				  fileEntry.createWriter(function(fileWriter) {
+				    /*window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder;
+				    var bb = new BlobBuilder();
+				    bb.append('Filesystem API is awesome!');
+				    fileWriter.write(bb.getBlob('text/plain'));*/
+				    fileWriter.onwriteend=function(){
+				    	console.log("写文件操作结束")
+				    }
+				    fileWriter.onerror=function(){
+				    	console.log("写文件操作失败")
+				    }
+				    var blob=new Blob(["测试"]);
+				    fileWriter.write(blob);
+				  });
+				});
+			},function(fe){});
+		},function(e){});
+	}
+	</script>
+</body>
+</html>

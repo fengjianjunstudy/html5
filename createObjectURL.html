@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<textarea id="text"></textarea>
+	<button id="btn">创建及下载二进制文件</button>
+	<output id="result"></output>
+	<script type="text/javascript">
+	document.getElementById("btn").onclick=function(){
+		var value=document.getElementById("text").value;
+		var blob=new Blob([text],{type:"text/plain;charset=utf-8"});
+		console.log(blob.slice(2,5))
+		document.getElementById("result").innerHTML="<a download href='"+window.URL.createObjectURL(blob)+"' target='_blank'>下载文件</a>"
+
+	}
+	</script>
+</body>
+</html>

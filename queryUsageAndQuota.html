@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>申请磁盘配额</h1>
+	<form>
+		<input type="text" name="" id="capacity" value="1024">
+		<input type="button" value="申请磁盘配额" id="btn">
+	</form>
+	<div id="result"></div>
+	<script type="text/javascript">
+	document.getElementById("btn").onclick=function(){
+		var size=document.getElementById("capacity").value;
+		/*window.webkitStorageInfo.requestQuota(PERSISTENT,size,function(grantedBytes){
+			var text="申请磁盘成功";
+			console.log(grantedBytes)
+		},function(e){});*/
+		function onInitFs(fs){
+			console.log(fs)
+		}
+		function errorHandler(fe){
+
+		}
+		window.webkitStorageInfo.queryUsageAndQuota(window.PERSISTENT,function(usage,quota){
+			console.log( usage+" "+quota)
+		},function(e){});
+	}
+	</script>
+</body>
+</html>
